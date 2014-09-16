@@ -8,7 +8,7 @@ defmodule Canvas do
 
     children = [
       # Define workers and child supervisors to be supervised
-      # worker(TestApp.Worker, [arg1, arg2, arg3])
+      worker(Canvas.Repo, [])
     ]
 
     opts = [strategy: :one_for_one, name: Canvas.Supervisor]

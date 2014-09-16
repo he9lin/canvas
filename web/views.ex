@@ -1,5 +1,4 @@
 defmodule Canvas.Views do
-
   defmacro __using__(_options) do
     quote do
       use Phoenix.View
@@ -12,6 +11,5 @@ defmodule Canvas.Views do
   end
 
   # Functions defined here are available to all other views/templates
+  def title, do: "Startup Canvases"
 end
-
-

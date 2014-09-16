@@ -7,19 +7,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Phoenix!</title>
+    <title><%= @title %></title>
     <link rel="stylesheet" href="/css/app.css">
   </head>
 
   <body>
     <div class="container">
-      <div class="header">
-      </div>
-
       <%= @inner %>
-
-      <div class="footer">
-      </div>
     </div> <!-- /container -->
   </body>
 </html>
