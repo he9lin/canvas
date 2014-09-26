@@ -1,5 +1,7 @@
 use Mix.Config
 
+config :repo, database_url: "ecto://postgres:postgres@localhost/canvas_development"
+
 config :phoenix, Canvas.Router,
   port: System.get_env("PORT") || 4000,
   ssl: false,
@@ -14,5 +16,3 @@ config :phoenix, :code_reloader,
 
 config :logger, :console,
   level: :debug
-
-

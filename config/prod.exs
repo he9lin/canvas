@@ -8,6 +8,7 @@ use Mix.Config
 #
 # Where those two env variables point to a file on disk
 # for the key and cert
+config :repo, database_url: System.get_env("DATABASE_URL")
 
 config :phoenix, Canvas.Router,
   port: System.get_env("PORT"),
@@ -20,4 +21,3 @@ config :phoenix, Canvas.Router,
 config :logger, :console,
   level: :info,
   metadata: [:request_id]
-
