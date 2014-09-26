@@ -1,10 +1,6 @@
 defmodule Canvas.PageController do
   use Phoenix.Controller
 
-  alias Canvas.Page
-  alias Canvas.Repo
-  alias Canvas.Router
-
   def show(conn, %{"id" => id}) do
     page = Repo.get!(Page, id)
     render conn, "show", page: page

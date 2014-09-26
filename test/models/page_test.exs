@@ -1,7 +1,5 @@
 defmodule CanvasTest.Page do
   use ExUnit.Case
-  alias Canvas.Page
-  alias Canvas.Repo
 
   test "can create many sections" do
     page = %Page{name: "page 1"}

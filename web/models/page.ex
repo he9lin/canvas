@@ -1,6 +1,5 @@
-defmodule Canvas.Page do
+defmodule Page do
   use Ecto.Model
-  alias Canvas.Section
 
   validate page, name: present()
 
