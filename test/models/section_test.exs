@@ -12,16 +12,13 @@ defmodule CanvasTest.SectionTest do
     Repo.delete_all(Section)
   end
 
-  test "has a name" do
-    section = %Section{name: "section1"}
-    section = Repo.insert(section)
-    assert section.name == "section1"
-
-    Repo.delete(section)
+  test "validates presence of page_id" do
+    errors = Section.validate(%Section{})
+    assert errors[:page_id] == "can't be blank"
   end
 
   test "validates presence of name" do
-    [name: error] = Section.validate(%Section{})
-    assert error == "can't be blank"
+    errors = Section.validate(%Section{})
+    assert errors[:name] == "can't be blank"
   end
 end

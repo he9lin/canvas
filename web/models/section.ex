@@ -1,7 +1,9 @@
 defmodule Section do
   use Ecto.Model
 
-  validate section, name: present()
+  validate section,
+    name: present(),
+    page_id: present()
 
   schema "sections" do
     field      :name
