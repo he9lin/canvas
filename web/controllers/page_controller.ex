@@ -2,17 +2,13 @@ defmodule Canvas.PageController do
   use Phoenix.Controller
 
   def show(conn, %{"id" => id}) do
-    page = Repo.get!(Page, id)
-    render conn, "show", page: page
+    page = Repo.get!(Page, String.to_integer(id))
+    json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
   end
 
   def index(conn, _) do
     pages = Repo.all(Page)
-    render conn, "index", pages: pages
-  end
-
-  def new(conn, _) do
-    render conn, "new"
+    json conn, JSON.encode!(%{pages: JSONSerializer.as_json(pages)})
   end
 
   def create(conn, %{"page" => %{"name" => name}}) do
@@ -20,10 +16,23 @@ defmodule Canvas.PageController do
 
     case Page.validate(page) do
       [] ->
-        Repo.insert(page)
-        redirect conn, Router.page_path(:index)
+        page = Repo.insert(page)
+        json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
       errors ->
-        render conn, "new", page: page, errors: errors
+        json conn, JSON.encode!(%{errors: "error"})
+    end
+  end
+
+  def update(conn, %{"id" => id, "page" => %{"name" => name}}) do
+    page = Repo.get!(Page, String.to_integer(id))
+    page = %{page | name: name}
+
+    case Page.validate(page) do
+      [] ->
+        Repo.update(page)
+        json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
+      errors ->
+        json conn, JSON.encode!(%{errors: "error"})
     end
   end
 end
