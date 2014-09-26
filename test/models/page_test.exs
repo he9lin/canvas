@@ -2,6 +2,11 @@ defmodule CanvasTest.Page do
   use ExUnit.Case
   require Logger
 
+  test "validates presence of name" do
+    [name: error] = Page.validate(%Page{})
+    assert error == "can't be blank"
+  end
+
   test "can create many sections" do
     page     = Repo.insert(%Page{name: "page 1"})
     sections = page.sections

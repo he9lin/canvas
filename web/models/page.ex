@@ -4,7 +4,7 @@ defmodule Page do
   validate page, name: present()
 
   schema "pages" do
-    field :name
+    field    :name
     has_many :sections, Section
   end
 end
