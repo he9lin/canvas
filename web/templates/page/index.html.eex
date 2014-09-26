@@ -1,0 +1,8 @@
+<div class='page-header'>
+  <h1>Pages</h1>
+</div>
+<ul>
+<%= for page <- @pages do %>
+  <li><%= page.name %></li>
+<% end %>
+</ul>

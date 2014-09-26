@@ -1,5 +1,5 @@
 defmodule Canvas.Router do
   use Phoenix.Router
 
-  resources "/canvases", Canvas.CanvasController
+  resources "/pages", Canvas.PageController
 end

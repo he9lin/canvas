@@ -1,8 +1,0 @@
-<div class='page-header'>
-  <h1>Canvases</h1>
-</div>
-<ul>
-<%= for canvas <- @canvases do %>
-  <li><%= canvas.name %></li>
-<% end %>
-</ul>
