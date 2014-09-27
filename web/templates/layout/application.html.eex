@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/app.css">
   </head>
-
   <body>
     <div class="container">
       <%= @inner %>
@@ -21,6 +20,7 @@
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/handlebars-1.1.2.min.js"></script>
     <script src="js/ember-1.7.0.min.js"></script>
+    <script src="js/ember-data.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/canvas.js"></script>
   </body>

@@ -1,0 +1,29 @@
+<script type="text/x-handlebars" data-template-name="pages">
+  <h1>Pages</h1>
+  <ul id='pages'>
+    {{#each model}}
+      <li class='page'>{{name}}</li>
+    {{/each}}
+  </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="page">
+  <header>
+    <h3>{{name}}</h3>
+  </header>
+  <div class="panel panel-default page">
+    <div class="panel-body">
+      <div class="row">
+        {{#each orderedSections}}
+          {{page-section name=name colClass=colClass}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/x-handlebars" id="components/page-section">
+  <div {{bind-attr class=":sec colClass"}}>{{name}}</div>
+</script>
+
+<div id='ember-app'></div>
