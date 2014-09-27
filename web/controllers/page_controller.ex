@@ -1,9 +1,13 @@
 defmodule Canvas.PageController do
   use Phoenix.Controller
+  require Logger
 
   def show(conn, %{"id" => id}) do
-    page = Repo.get!(Page, String.to_integer(id))
-    json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
+    page      = Repo.get!(Page, String.to_integer(id))
+    sections  = Repo.all(page.sections)
+    page_json = JSONSerializer.as_json(page) |> Dict.put_new(:sections, JSONSerializer.as_json(sections))
+
+    json conn, JSON.encode!(%{page: page_json})
   end
 
   def index(conn, _) do
@@ -16,10 +20,10 @@ defmodule Canvas.PageController do
 
     case Page.validate(page) do
       [] ->
-        page = Repo.insert(page)
+        page = Page.create(name: name)
         json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
       errors ->
-        json conn, JSON.encode!(%{errors: "error"})
+        json conn, JSON.encode!(%{errors: errors |> Dict.values |> List.first})
     end
   end
 
@@ -32,7 +36,7 @@ defmodule Canvas.PageController do
         Repo.update(page)
         json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
       errors ->
-        json conn, JSON.encode!(%{errors: "error"})
+        json conn, JSON.encode!(%{errors: errors |> Dict.values |> List.first})
     end
   end
 end

@@ -19,4 +19,13 @@ defmodule CanvasTest.Page do
     Repo.delete_all(Page)
     Repo.delete_all(Section)
   end
+
+  test "create page with default sections" do
+    page = Page.create(name: "page")
+    assert Enum.count(Repo.all(page.sections)) == 12
+
+    # clean up
+    Repo.delete_all(Page)
+    Repo.delete_all(Section)
+  end
 end
