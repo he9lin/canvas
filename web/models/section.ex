@@ -8,6 +8,7 @@ defmodule Section do
   schema "sections" do
     field      :name
     belongs_to :page, Post
+    has_many   :items, Item
   end
 
   def create(page, params) do

@@ -3,11 +3,8 @@ defmodule Canvas.PageController do
   require Logger
 
   def show(conn, %{"id" => id}) do
-    page      = Repo.get!(Page, String.to_integer(id))
-    sections  = Repo.all(page.sections)
-    page_json = JSONSerializer.as_json(page) |> Dict.put_new(:sections, JSONSerializer.as_json(sections))
-
-    json conn, JSON.encode!(%{page: page_json})
+    page = Repo.get!(Page, String.to_integer(id))
+    json conn, JSON.encode!(%{page: JSONSerializer.as_json(page)})
   end
 
   def index(conn, _) do
