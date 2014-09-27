@@ -18,9 +18,9 @@
       <%= @inner %>
     </div> <!-- /container -->
 
-    <script src="js/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/handlebars-1.1.2.js"></script>
-    <script src="js/ember-1.7.0.js"></script>
+    <script src="js/ember-1.7.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/canvas.js"></script>
   </body>
