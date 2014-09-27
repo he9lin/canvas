@@ -2,9 +2,13 @@ body {
 }
 
 .sec {
-  height: 200px;
+  min-height: 200px;
 }
 
 .page {
   padding: 20px 0;
+}
+
+.text-light {
+  color: #f2f2f2;
 }

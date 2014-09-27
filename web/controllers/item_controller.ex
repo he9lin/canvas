@@ -2,7 +2,7 @@ defmodule Canvas.ItemController do
   use Phoenix.Controller
   require Logger
 
-  def create(conn, %{"section_id" => section_id, "item" => %{"content" => content}}) do
+  def create(conn, %{"item" => %{"content" => content, "section_id" => section_id}}) do
     section = Repo.get!(Section, String.to_integer(section_id))
     item    = %Item{content: content, section_id: section.id}
 

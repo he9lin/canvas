@@ -1,6 +1,4 @@
 (function() {
-  var ORDERED_SECTION_TAGS;
-
   window.Canvas = Ember.Application.create({
     rootElement: '#ember-app'
   });
@@ -30,63 +28,23 @@
     }
   });
 
-  Canvas.PagesController = Ember.Controller.extend({
-    pages: Ember.computed.alias('model'),
-    setupController: function(controller, pages) {
-      return controller.set('model', pages);
-    }
+  Canvas.PagesController = Ember.ArrayController.extend({
+    pages: Ember.computed.alias('model')
   });
 
-  ORDERED_SECTION_TAGS = {
-    'problem': {
-      seat: 0,
-      col: 'col-md-2'
-    },
-    'solution': {
-      seat: 1,
-      col: 'col-md-2'
-    },
-    'unique-value-proposition': {
-      seat: 2,
-      col: 'col-md-2'
-    },
-    'unfair-advantage': {
-      seat: 3,
-      col: 'col-md-2'
-    },
-    'customer-segments': {
-      seat: 4,
-      col: 'col-md-3'
-    },
-    'existing-alternatives': {
-      seat: 5,
-      col: 'col-md-2'
-    },
-    'key-metrics': {
-      seat: 6,
-      col: 'col-md-2'
-    },
-    'high-level-concept': {
-      seat: 7,
-      col: 'col-md-2'
-    },
-    'channels': {
-      seat: 8,
-      col: 'col-md-2'
-    },
-    'early-adopter': {
-      seat: 9,
-      col: 'col-md-3'
-    },
-    'cost-structure': {
-      seat: 10,
-      col: 'col-md-6'
-    },
-    'revenue-streams': {
-      seat: 11,
-      col: 'col-md-6'
+  Canvas.PageController = Ember.ObjectController.extend({
+    actions: {
+      createItem: function(params) {
+        var item, section;
+        section = this.store.getById('section', params.section_id);
+        console.log(section);
+        item = this.store.createRecord('item', params);
+        return item.save().then(function(item) {
+          return section.get('items').addObject(item);
+        });
+      }
     }
-  };
+  });
 
   Canvas.Page = DS.Model.extend({
     name: DS.attr('string'),
@@ -97,13 +55,63 @@
   });
 
   Canvas.Section = DS.Model.extend({
+    ORDERED_SECTION_TAGS: {
+      'problem': {
+        seat: 0,
+        col: 'col-md-2'
+      },
+      'solution': {
+        seat: 1,
+        col: 'col-md-2'
+      },
+      'unique-value-proposition': {
+        seat: 2,
+        col: 'col-md-2'
+      },
+      'unfair-advantage': {
+        seat: 3,
+        col: 'col-md-2'
+      },
+      'customer-segments': {
+        seat: 4,
+        col: 'col-md-3'
+      },
+      'existing-alternatives': {
+        seat: 5,
+        col: 'col-md-2'
+      },
+      'key-metrics': {
+        seat: 6,
+        col: 'col-md-2'
+      },
+      'high-level-concept': {
+        seat: 7,
+        col: 'col-md-2'
+      },
+      'channels': {
+        seat: 8,
+        col: 'col-md-2'
+      },
+      'early-adopter': {
+        seat: 9,
+        col: 'col-md-3'
+      },
+      'cost-structure': {
+        seat: 10,
+        col: 'col-md-6'
+      },
+      'revenue-streams': {
+        seat: 11,
+        col: 'col-md-6'
+      }
+    },
     name: DS.attr('string'),
     items: DS.hasMany('item'),
     tag: Ember.computed(function() {
       return this.get('name').dasherize();
     }),
     tagInfo: Ember.computed(function() {
-      return ORDERED_SECTION_TAGS[this.get('tag')];
+      return this.ORDERED_SECTION_TAGS[this.get('tag')];
     }),
     seat: Ember.computed(function() {
       return this.get('tagInfo').seat;
@@ -114,6 +122,7 @@
   });
 
   Canvas.Item = DS.Model.extend({
+    section_id: DS.attr(),
     content: DS.attr('string')
   });
 
@@ -121,6 +130,37 @@
     attrs: {
       sections: {
         embedded: 'always'
+      }
+    }
+  });
+
+  Canvas.SectionSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
+    attrs: {
+      items: {
+        embedded: 'always'
+      }
+    }
+  });
+
+  Canvas.PageSectionComponent = Ember.Component.extend({
+    isEditing: false,
+    createItem: "createItem",
+    actions: {
+      cancel: function() {
+        return this.set('isEditing', false);
+      },
+      edit: function() {
+        return this.set('isEditing', true);
+      },
+      createItem: function() {
+        var content, sectionId;
+        sectionId = this.get('sectionId');
+        content = this.$('input.item-content').val();
+        this.sendAction('createItem', {
+          section_id: sectionId,
+          content: content
+        });
+        return this.set('isEditing', false);
       }
     }
   });

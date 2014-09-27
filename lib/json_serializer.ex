@@ -16,7 +16,7 @@ end
 
 defimpl JSONSerializer, for: Section do
   def as_json(section) do
-    %{id: section.id, name: section.name}
+    %{id: section.id, name: section.name} |> Dict.put_new(:items, JSONSerializer.as_json(Repo.all(section.items)))
   end
 end
 

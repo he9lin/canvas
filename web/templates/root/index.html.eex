@@ -15,7 +15,7 @@
     <div class="panel-body">
       <div class="row">
         {{#each orderedSections}}
-          {{page-section name=name colClass=colClass}}
+          {{page-section name=name colClass=colClass items=items sectionId=id}}
         {{/each}}
       </div>
     </div>
@@ -23,7 +23,26 @@
 </script>
 
 <script type="text/x-handlebars" id="components/page-section">
-  <div {{bind-attr class=":sec colClass"}}>{{name}}</div>
+  <div {{bind-attr class=":sec colClass"}}>
+    <p><strong>{{name}}</strong></p>
+    <ul class='items list-unstyled'>
+    {{#each items}}
+      {{section-item content=content}}
+    {{/each}}
+    <li>
+      {{#if isEditing}}
+        {{input action="createItem" on="enter" class="item-content form-control"}}
+        <a {{action "cancel"}} href='#'>Cancel</a>
+      {{else}}
+        <span {{action "edit"}} class='text-light glyphicon glyphicon-plus-sign'></span>
+      {{/if}}
+    </li>
+    </ul>
+  </div>
+</script>
+
+<script type="text/x-handlebars" id="components/section-item">
+  <li>{{content}}</li>
 </script>
 
 <div id='ember-app'></div>

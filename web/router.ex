@@ -4,7 +4,6 @@ defmodule Canvas.Router do
   get "/", Canvas.RootController, :index
 
   resources "/pages", Canvas.PageController
-  resources "/sections", Canvas.SectionController do
-    resources "/items", Canvas.ItemController
-  end
+  resources "/sections", Canvas.SectionController
+  resources "/items", Canvas.ItemController
 end
