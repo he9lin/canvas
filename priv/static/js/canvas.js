@@ -9,6 +9,8 @@
     });
     return this.resource('page', {
       path: '/page/:id'
+    }, function() {
+      return this.route('settings');
     });
   });
 
@@ -45,7 +47,16 @@
     }
   });
 
-  Canvas.PageController = Ember.ObjectController.extend({
+  Canvas.PageSettingsController = Ember.ObjectController.extend({
+    actions: {
+      destroyPage: function() {
+        this.get('model').destroyRecord();
+        return this.transitionTo("pages.index");
+      }
+    }
+  });
+
+  Canvas.PageIndexController = Ember.ObjectController.extend({
     actions: {
       createItem: function(params) {
         var item, section;

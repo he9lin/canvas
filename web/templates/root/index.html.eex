@@ -17,12 +17,25 @@
   </ul>
 </script>
 
+<script type="text/x-handlebars" data-template-name="page/settings">
+  <header>
+    <div class='title'>
+      {{#link-to 'pages'}}
+        <span class='glyphicon glyphicon-chevron-left'></span>
+      {{/link-to}}
+      <h1>Delete the page</h1>
+      {{name}}
+    </div>
+  </header>
+  <button {{action "destroyPage"}} class='btn btn-danger btn-default'>Delete</button>
+</script>
+
 <script type="text/x-handlebars" data-template-name="pages/new">
 <h1>New</h1>
 {{page-form}}
 </script>
 
-<script type="text/x-handlebars" data-template-name="page">
+<script type="text/x-handlebars" data-template-name="page/index">
   <header>
     <div class='title'>
       {{#link-to 'pages'}}

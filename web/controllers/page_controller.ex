@@ -36,4 +36,10 @@ defmodule Canvas.PageController do
         json conn, JSON.encode!(%{errors: errors |> Dict.values |> List.first})
     end
   end
+
+  def destroy(conn, %{"id" => id}) do
+    page = Repo.get!(Page, String.to_integer(id))
+    Repo.delete(page)
+    json conn, JSON.encode!(%{})
+  end
 end

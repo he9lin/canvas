@@ -3,7 +3,8 @@ window.Canvas = Ember.Application.create(rootElement: '#ember-app')
 Canvas.Router.map ->
   @resource 'pages', ->
     @route('new')
-  @resource('page', path: '/page/:id')
+  @resource 'page', path: '/page/:id', ->
+    @route('settings')
 
 # Routes
 Canvas.IndexRoute = Ember.Route.extend
@@ -28,7 +29,13 @@ Canvas.PagesNewController = Ember.ObjectController.extend
       page.save()
       @transitionTo("pages.index")
 
-Canvas.PageController = Ember.ObjectController.extend
+Canvas.PageSettingsController = Ember.ObjectController.extend
+  actions:
+    destroyPage: ->
+      @get('model').destroyRecord()
+      @transitionTo("pages.index")
+
+Canvas.PageIndexController = Ember.ObjectController.extend
   actions:
     createItem: (params) ->
       section = @store.getById('section', params.section_id)
