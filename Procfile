@@ -1,1 +1,1 @@
-mix phoenix.start
+web: mix phoenix.start
