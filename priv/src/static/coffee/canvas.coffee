@@ -1,14 +1,15 @@
 window.Canvas = Ember.Application.create(rootElement: '#ember-app')
 
 Canvas.Router.map ->
-  @resource('pages')
+  @resource 'pages', ->
+    @route('new')
   @resource('page', path: '/page/:id')
 
 # Routes
 Canvas.IndexRoute = Ember.Route.extend
   redirect: -> @transitionTo 'pages'
 
-Canvas.PagesRoute = Ember.Route.extend
+Canvas.PagesIndexRoute = Ember.Route.extend
   model: ->
     @store.find('page')
 
@@ -17,8 +18,15 @@ Canvas.PageRoute = Ember.Route.extend
     @store.find('page', params.id)
 
 # Controllers
-Canvas.PagesController = Ember.ArrayController.extend
+Canvas.PagesIndexController = Ember.ArrayController.extend
   pages: Ember.computed.alias('model')
+
+Canvas.PagesNewController = Ember.ObjectController.extend
+  actions:
+    createPage: (params) ->
+      page = @store.createRecord('page', params)
+      page.save()
+      @transitionTo("pages.index")
 
 Canvas.PageController = Ember.ObjectController.extend
   actions:
@@ -84,6 +92,13 @@ Canvas.PageSectionComponent = Ember.Component.extend
       content   = @.$('input.item-content').val()
       @sendAction('createItem', section_id: sectionId, content: content)
       @.$('input.item-content').val('')
+
+Canvas.PageFormComponent = Ember.Component.extend
+  createPage: "createPage"
+  actions:
+    submit: ->
+      name = @.$('input[name=name]').val()
+      @sendAction('createPage', name: name)
 
 Canvas.SectionItemComponent = Ember.Component.extend
   destroyItem: "destroyItem"

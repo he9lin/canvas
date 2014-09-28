@@ -4,7 +4,9 @@
   });
 
   Canvas.Router.map(function() {
-    this.resource('pages');
+    this.resource('pages', function() {
+      return this.route('new');
+    });
     return this.resource('page', {
       path: '/page/:id'
     });
@@ -16,7 +18,7 @@
     }
   });
 
-  Canvas.PagesRoute = Ember.Route.extend({
+  Canvas.PagesIndexRoute = Ember.Route.extend({
     model: function() {
       return this.store.find('page');
     }
@@ -28,8 +30,19 @@
     }
   });
 
-  Canvas.PagesController = Ember.ArrayController.extend({
+  Canvas.PagesIndexController = Ember.ArrayController.extend({
     pages: Ember.computed.alias('model')
+  });
+
+  Canvas.PagesNewController = Ember.ObjectController.extend({
+    actions: {
+      createPage: function(params) {
+        var page;
+        page = this.store.createRecord('page', params);
+        page.save();
+        return this.transitionTo("pages.index");
+      }
+    }
   });
 
   Canvas.PageController = Ember.ObjectController.extend({
@@ -162,6 +175,19 @@
           content: content
         });
         return this.$('input.item-content').val('');
+      }
+    }
+  });
+
+  Canvas.PageFormComponent = Ember.Component.extend({
+    createPage: "createPage",
+    actions: {
+      submit: function() {
+        var name;
+        name = this.$('input[name=name]').val();
+        return this.sendAction('createPage', {
+          name: name
+        });
       }
     }
   });
