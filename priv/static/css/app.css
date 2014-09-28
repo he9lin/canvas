@@ -6,7 +6,22 @@ body {
 }
 
 .page {
-  padding: 20px 0;
+}
+
+ul.pages li.page {
+  line-height: 50px;
+  border-bottom: 1px solid #f2f2f2;
+}
+ul.pages li.page:hover {
+  background-color: #f1f1f9;
+}
+ul.pages li.page a {
+  display: block;
+  color: #333;
+  padding: 0 10px;
+}
+ul.pages li.page a:hover {
+  text-decoration: none;
 }
 
 .text-light {
@@ -15,6 +30,10 @@ body {
 
 .section-title {
   padding-left: 20px;
+}
+
+div.title {
+  font-size: 2em;
 }
 
 input.item-content {
