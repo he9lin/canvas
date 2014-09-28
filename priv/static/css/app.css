@@ -10,5 +10,49 @@ body {
 }
 
 .text-light {
-  color: #f2f2f2;
+  color: #e2e2e2;
+}
+
+.section-title {
+  padding-left: 20px;
+}
+
+input.item-content {
+  box-shadow: none;
+  border: none;
+  padding: 6px 10px;
+}
+input.item-content:hover {
+  box-shadow: none;
+  background: #f2f2f2;
+}
+input.item-content:focus {
+  box-shadow: none;
+  background: cornsilk;
+}
+
+ul.items li {
+  position: relative;
+}
+ul.items li.add-item {
+  padding-left: 20px;
+}
+ul.items li.add-item span {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+}
+
+ul.items li.section-item {
+  padding-left: 20px;
+}
+ul.items li.section-item span {
+  position: absolute;
+  top: 3px;
+  left: 0px;
+  display: none;
+  cursor: pointer;
+}
+ul.items li.section-item:hover span {
+  display: inline-block;
 }

@@ -27,4 +27,11 @@ defmodule Canvas.ItemController do
         json conn, JSON.encode!(%{errors: errors |> Dict.values |> List.first})
     end
   end
+
+  def destroy(conn, %{"id" => id}) do
+    item = Repo.get!(Item, String.to_integer(id))
+    Logger.info item.id
+    Repo.delete(item)
+    json conn, JSON.encode!(%{})
+  end
 end

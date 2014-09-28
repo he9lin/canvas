@@ -24,25 +24,21 @@
 
 <script type="text/x-handlebars" id="components/page-section">
   <div {{bind-attr class=":sec colClass"}}>
-    <p><strong>{{name}}</strong></p>
+    <p class='section-title'><strong>{{name}}</strong></p>
     <ul class='items list-unstyled'>
     {{#each items}}
-      {{section-item content=content}}
+      {{section-item content=content itemId=id}}
     {{/each}}
-    <li>
-      {{#if isEditing}}
-        {{input action="createItem" on="enter" class="item-content form-control"}}
-        <a {{action "cancel"}} href='#'>Cancel</a>
-      {{else}}
-        <span {{action "edit"}} class='text-light glyphicon glyphicon-plus-sign'></span>
-      {{/if}}
+    <li class='add-item'>
+      <span class='text-light glyphicon glyphicon-edit'></span>
+      {{input action="createItem" on="enter" class="item-content form-control"}}
     </li>
     </ul>
   </div>
 </script>
 
 <script type="text/x-handlebars" id="components/section-item">
-  <li>{{content}}</li>
+  <li class='section-item'><span {{action "destroy"}} class='text-danger glyphicon glyphicon-remove-circle'></span>{{content}}</li>
 </script>
 
 <div id='ember-app'></div>

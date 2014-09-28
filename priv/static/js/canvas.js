@@ -37,11 +37,15 @@
       createItem: function(params) {
         var item, section;
         section = this.store.getById('section', params.section_id);
-        console.log(section);
         item = this.store.createRecord('item', params);
         return item.save().then(function(item) {
           return section.get('items').addObject(item);
         });
+      },
+      destroyItem: function(itemId) {
+        var item;
+        item = this.store.getById('item', itemId);
+        return item.destroyRecord();
       }
     }
   });
@@ -66,7 +70,7 @@
       },
       'unique-value-proposition': {
         seat: 2,
-        col: 'col-md-2'
+        col: 'col-md-3'
       },
       'unfair-advantage': {
         seat: 3,
@@ -74,7 +78,7 @@
       },
       'customer-segments': {
         seat: 4,
-        col: 'col-md-3'
+        col: 'col-md-2'
       },
       'existing-alternatives': {
         seat: 5,
@@ -90,11 +94,11 @@
       },
       'channels': {
         seat: 8,
-        col: 'col-md-2'
+        col: 'col-md-3'
       },
       'early-adopter': {
         seat: 9,
-        col: 'col-md-3'
+        col: 'col-md-2'
       },
       'cost-structure': {
         seat: 10,
@@ -143,14 +147,11 @@
   });
 
   Canvas.PageSectionComponent = Ember.Component.extend({
-    isEditing: false,
     createItem: "createItem",
+    destroyItem: "destroyItem",
     actions: {
-      cancel: function() {
-        return this.set('isEditing', false);
-      },
-      edit: function() {
-        return this.set('isEditing', true);
+      destroyItem: function(itemId) {
+        return this.sendAction('destroyItem', itemId);
       },
       createItem: function() {
         var content, sectionId;
@@ -160,7 +161,18 @@
           section_id: sectionId,
           content: content
         });
-        return this.set('isEditing', false);
+        return this.$('input.item-content').val('');
+      }
+    }
+  });
+
+  Canvas.SectionItemComponent = Ember.Component.extend({
+    destroyItem: "destroyItem",
+    actions: {
+      destroy: function() {
+        var itemId;
+        itemId = this.get('itemId');
+        return this.sendAction('destroyItem', itemId);
       }
     }
   });

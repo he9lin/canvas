@@ -24,9 +24,11 @@ Canvas.PageController = Ember.ObjectController.extend
   actions:
     createItem: (params) ->
       section = @store.getById('section', params.section_id)
-      console.log section
-      item = @store.createRecord('item', params)
+      item    = @store.createRecord('item', params)
       item.save().then((item) -> section.get('items').addObject(item))
+    destroyItem: (itemId) ->
+      item = @store.getById('item', itemId)
+      item.destroyRecord()
 
 # Models
 Canvas.Page = DS.Model.extend
@@ -38,14 +40,14 @@ Canvas.Section = DS.Model.extend
   ORDERED_SECTION_TAGS:
     'problem':                  {seat: 0, col: 'col-md-2'}
     'solution':                 {seat: 1, col: 'col-md-2'}
-    'unique-value-proposition': {seat: 2, col: 'col-md-2'}
+    'unique-value-proposition': {seat: 2, col: 'col-md-3'}
     'unfair-advantage':         {seat: 3, col: 'col-md-2'}
-    'customer-segments':        {seat: 4, col: 'col-md-3'}
+    'customer-segments':        {seat: 4, col: 'col-md-2'}
     'existing-alternatives':    {seat: 5, col: 'col-md-2'}
     'key-metrics':              {seat: 6, col: 'col-md-2'}
     'high-level-concept':       {seat: 7, col: 'col-md-2'}
-    'channels':                 {seat: 8, col: 'col-md-2'}
-    'early-adopter':            {seat: 9, col: 'col-md-3'}
+    'channels':                 {seat: 8, col: 'col-md-3'}
+    'early-adopter':            {seat: 9, col: 'col-md-2'}
     'cost-structure':           {seat: 10, col: 'col-md-6'}
     'revenue-streams':          {seat: 11, col: 'col-md-6'}
 
@@ -72,15 +74,20 @@ Canvas.SectionSerializer = DS.ActiveModelSerializer.extend DS.EmbeddedRecordsMix
 
 # Components
 Canvas.PageSectionComponent = Ember.Component.extend
-  isEditing: false
   createItem: "createItem"
+  destroyItem: "destroyItem"
   actions:
-    cancel: ->
-      @set('isEditing', false)
-    edit: ->
-      @set('isEditing', true)
+    destroyItem: (itemId) ->
+      @sendAction('destroyItem', itemId)
     createItem: ->
       sectionId = @get('sectionId')
       content   = @.$('input.item-content').val()
       @sendAction('createItem', section_id: sectionId, content: content)
-      @set('isEditing', false)
+      @.$('input.item-content').val('')
+
+Canvas.SectionItemComponent = Ember.Component.extend
+  destroyItem: "destroyItem"
+  actions:
+    destroy: ->
+      itemId = @get('itemId')
+      @sendAction('destroyItem', itemId)
