@@ -1,77 +1,52 @@
-body {
-}
-
 .sec {
-  min-height: 200px;
-}
+  min-height: 200px; }
+  .sec .section-title {
+    padding-left: 20px; }
 
-.page {
-}
+.text-light {
+  color: #e2e2e2; }
+
+div.title {
+  font-size: 2em; }
 
 ul.pages li.page {
   line-height: 50px;
-  border-bottom: 1px solid #f2f2f2;
-}
-ul.pages li.page:hover {
-  background-color: #f1f1f9;
-}
-ul.pages li.page a {
-  display: block;
-  color: #333;
-  padding: 0 10px;
-}
-ul.pages li.page a:hover {
-  text-decoration: none;
-}
-
-.text-light {
-  color: #e2e2e2;
-}
-
-.section-title {
-  padding-left: 20px;
-}
-
-div.title {
-  font-size: 2em;
-}
+  border-bottom: 1px solid #f2f2f2; }
+  ul.pages li.page a {
+    display: block;
+    color: #333;
+    padding: 0 10px; }
+    ul.pages li.page a:hover {
+      text-decoration: none; }
+  ul.pages li.page:hover {
+    background-color: #f1f1f9; }
 
 input.item-content {
   box-shadow: none;
   border: none;
-  padding: 6px 10px;
-}
-input.item-content:hover {
-  box-shadow: none;
-  background: #f2f2f2;
-}
-input.item-content:focus {
-  box-shadow: none;
-  background: cornsilk;
-}
+  padding: 6px 10px; }
+  input.item-content:hover {
+    box-shadow: none;
+    background: #f2f2f2; }
+  input.item-content:focus {
+    box-shadow: none;
+    background: cornsilk; }
 
 ul.items li {
-  position: relative;
-}
-ul.items li.add-item {
-  padding-left: 20px;
-}
-ul.items li.add-item span {
-  position: absolute;
-  top: 10px;
-  left: 0px;
-}
-
-ul.items li.section-item {
-  padding-left: 20px;
-}
-ul.items li.section-item span {
-  position: absolute;
-  top: 3px;
-  left: 0px;
-  display: none;
-  cursor: pointer;
-}
-ul.items li.section-item:hover span {
-  display: inline-block;
-}
+  position: relative; }
+  ul.items li.section-item {
+    padding-left: 20px; }
+    ul.items li.section-item:hover span {
+      display: inline-block; }
+    ul.items li.section-item span {
+      position: absolute;
+      top: 3px;
+      left: 0px;
+      display: none;
+      cursor: pointer; }
+  ul.items li.add-item {
+    padding-left: 20px; }
+    ul.items li.add-item span {
+      position: absolute;
+      top: 10px;
+      left: 0px; }
