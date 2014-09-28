@@ -1,21 +1,78 @@
+body {
+  color: #3f3f44;
+  font-family: 'Open Sans', 'Arial', sans-serif; }
+  body form label {
+    font-family: 'Arial';
+    color: #4D407A;
+    font-weight: normal; }
+  body .main-section {
+    margin: 20px 0; }
+
+.form-control {
+  border-color: #f2f2f2;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
 .sec {
+  font-family: 'Arial';
   min-height: 200px; }
   .sec .section-title {
     padding-left: 20px; }
 
+.top-nav {
+  border-bottom: 1px solid #f2f2f2; }
+  .top-nav .pages-header {
+    padding: 15px 0; }
+    .top-nav .pages-header .nav-title {
+      text-align: center;
+      display: inline-block;
+      line-height: 30px;
+      width: calc(100% - 100px); }
+    .top-nav .pages-header .action-buttons {
+      float: right; }
+      .top-nav .pages-header .action-buttons a.add-page {
+        top: 5px;
+        position: relative; }
+
 .text-light {
   color: #e2e2e2; }
 
-div.title {
-  font-size: 2em; }
+.icon {
+  background: url("/images/sprite.png") no-repeat;
+  background-size: 424px 417px;
+  display: inline-block; }
+  .icon.icon-add-btn {
+    background-position: -400px -292px;
+    width: 16px;
+    height: 16px; }
+  .icon.icon-page {
+    background-position: -368px -126px;
+    width: 28px;
+    height: 30px; }
+  .icon.icon-back {
+    background-position: -354px -202px;
+    width: 12px;
+    height: 14px; }
+  .icon.icon-settings {
+    background-position: -368px -335px;
+    width: 24px;
+    height: 24px; }
 
 ul.pages li.page {
-  line-height: 50px;
-  border-bottom: 1px solid #f2f2f2; }
+  border-bottom: 1px solid #f2f2f2;
+  padding-left: 10px; }
   ul.pages li.page a {
     display: block;
-    color: #333;
-    padding: 0 10px; }
+    color: #3F3F44;
+    padding-top: 10px;
+    padding-bottom: 8px; }
+    ul.pages li.page a span.icon {
+      position: relative;
+      display: inline-block;
+      margin-right: 10px; }
+    ul.pages li.page a span.page-name {
+      position: relative;
+      top: -8px; }
     ul.pages li.page a:hover {
       text-decoration: none; }
   ul.pages li.page:hover {
