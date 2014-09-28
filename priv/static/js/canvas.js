@@ -38,7 +38,7 @@
 
   Canvas.PagesNewController = Ember.ObjectController.extend({
     actions: {
-      createPage: function(params) {
+      submitPageForm: function(params) {
         var page;
         page = this.store.createRecord('page', params);
         page.save();
@@ -49,6 +49,12 @@
 
   Canvas.PageSettingsController = Ember.ObjectController.extend({
     actions: {
+      submitPageForm: function(params) {
+        var page;
+        page = this.get('model');
+        page.set('name', params.name).save();
+        return this.transitionTo("page.index", page);
+      },
       destroyPage: function() {
         this.get('model').destroyRecord();
         return this.transitionTo("pages.index");
@@ -191,12 +197,12 @@
   });
 
   Canvas.PageFormComponent = Ember.Component.extend({
-    createPage: "createPage",
+    submitPageForm: "submitPageForm",
     actions: {
       submit: function() {
         var name;
         name = this.$('input[name=name]').val();
-        return this.sendAction('createPage', {
+        return this.sendAction('submitPageForm', {
           name: name
         });
       }

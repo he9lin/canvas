@@ -24,13 +24,17 @@ Canvas.PagesIndexController = Ember.ArrayController.extend
 
 Canvas.PagesNewController = Ember.ObjectController.extend
   actions:
-    createPage: (params) ->
+    submitPageForm: (params) ->
       page = @store.createRecord('page', params)
       page.save()
       @transitionTo("pages.index")
 
 Canvas.PageSettingsController = Ember.ObjectController.extend
   actions:
+    submitPageForm: (params) ->
+      page = @get('model')
+      page.set('name', params.name).save()
+      @transitionTo("page.index", page)
     destroyPage: ->
       @get('model').destroyRecord()
       @transitionTo("pages.index")
@@ -101,11 +105,11 @@ Canvas.PageSectionComponent = Ember.Component.extend
       @.$('input.item-content').val('')
 
 Canvas.PageFormComponent = Ember.Component.extend
-  createPage: "createPage"
+  submitPageForm: "submitPageForm"
   actions:
     submit: ->
       name = @.$('input[name=name]').val()
-      @sendAction('createPage', name: name)
+      @sendAction('submitPageForm', name: name)
 
 Canvas.SectionItemComponent = Ember.Component.extend
   destroyItem: "destroyItem"

@@ -29,6 +29,12 @@ body {
   }
 }
 
+.delete-page {
+  border-top: 1px solid $light-border-color;
+  padding: 20px 0;
+  text-align: center;
+}
+
 .top-nav {
   border-bottom: 1px solid $light-border-color;
   .pages-header {
