@@ -131,14 +131,26 @@ ul.items {
     &.section-item {
       padding-left: 20px;
       &:hover span {
-        display: inline-block;
+        &.delete-item {
+          display: inline-block;
+        }
+        &.dot-item {
+          display: none;
+        }
       }
       span {
         position: absolute;
         top: 3px;
         left: 0px;
-        display: none;
-        cursor: pointer;
+        &.dot-item {
+          font-size: 0.8em;
+          top: 4px;
+          left: 2px;
+        }
+        &.delete-item {
+          display: none;
+          cursor: pointer;
+        }
       }
     }
     &.add-item {

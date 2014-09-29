@@ -98,14 +98,21 @@ ul.items li {
   position: relative; }
   ul.items li.section-item {
     padding-left: 20px; }
-    ul.items li.section-item:hover span {
+    ul.items li.section-item:hover span.delete-item {
       display: inline-block; }
+    ul.items li.section-item:hover span.dot-item {
+      display: none; }
     ul.items li.section-item span {
       position: absolute;
       top: 3px;
-      left: 0px;
-      display: none;
-      cursor: pointer; }
+      left: 0px; }
+      ul.items li.section-item span.dot-item {
+        font-size: 0.8em;
+        top: 4px;
+        left: 2px; }
+      ul.items li.section-item span.delete-item {
+        display: none;
+        cursor: pointer; }
   ul.items li.add-item {
     padding-left: 20px; }
     ul.items li.add-item span {

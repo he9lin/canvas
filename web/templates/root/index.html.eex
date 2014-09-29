@@ -99,7 +99,11 @@
 </script>
 
 <script type="text/x-handlebars" id="components/section-item">
-  <li class='section-item'><span {{action "destroy"}} class='text-danger glyphicon glyphicon-remove-circle'></span>{{content}}</li>
+  <li class='section-item'>
+    <span {{action "destroy"}} class='delete-item text-danger glyphicon glyphicon-remove-circle'></span>
+    <span class='dot-item text-success glyphicon glyphicon-ok'></span>
+    {{content}}
+  </li>
 </script>
 
 <script type="text/x-handlebars" id="components/page-form">
