@@ -22,3 +22,7 @@ heroku config:set MIX_ENV=prod
 
 git push heroku master
 ```
+
+## TODO
+
+* Add authentication
